@@ -16,6 +16,7 @@ String dots = ".";
 void draw() {
   background(0,0,25);
   //scene.draw();
+  frameRate(30);
   frames++;
   
   if(frames == 15) {
@@ -39,4 +40,13 @@ void asetup() {
 }
 void controlEvent(ControlEvent theEvent) {
   scene.controlEvent(theEvent);
+}
+void mousePressed() {
+  scene.mousePressed();
+}
+void mouseDragged() {
+  scene.mouseDragged();
+}
+void mouseReleased() {
+  scene.mouseReleased();
 }
