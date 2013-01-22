@@ -107,6 +107,8 @@ class SceneManager {
     String month;
     String montht;
     String year;
+    int texs;
+    color back, texc;
     DoNow() {
     }
     void parseXML(XML _parse) {
@@ -115,6 +117,7 @@ class SceneManager {
       XML aime = child.getChild("aim");
       XML datee = child.getChild("date");
       XML activitye = child.getChild("activity");
+      XML stylee = child.getChild("style");
       agenda = agendae.getContent();
       aim = aime.getContent();
       day = datee.getString("day");
@@ -147,8 +150,8 @@ class SceneManager {
       if (int(month) == 11) montht = "November";
       if (int(month) == 12) montht = "December";
       println("Loading Activity-"+activitye.getString("type")+"-");
-      String actt = activitye.getString("type");
-      //if (ac == "mixandmatch") {
+      String ac = activitye.getString("type");
+      if (ac.equals("mixandmatch")) {
       println("Activity Mix And Match");
       XML[] dataene = activitye.getChildren("en");
       XML[] datafre = activitye.getChildren("fr");
@@ -161,14 +164,39 @@ class SceneManager {
         fr[datafre[f].getInt("id")] = datafre[f].getContent();
       }
       mixm = new MixMatch(en, fr);
+      }
+      XML textcolore = stylee.getChild("textcolor");
+      if(textcolore.getContent().substring(4).equals("rgb:")) {
+      } else {
+        if(toColorCode(textcolore.getContent()) !=-1) {
+          texc = color(toColorCode(textcolore.getContent()));
+        }
     }
-    //}
+    XML backgrounde = stylee.getChild("background");
+      if(backgrounde.getContent().substring(4).equals("rgb:")) {
+      } else {
+        if(toColorCode(backgrounde.getContent()) !=-1) {
+          back = color(toColorCode(backgrounde.getContent()));
+        }
+    }
+    XML textsizee = stylee.getChild("textsize");
+    texs = int(textsizee.getContent());
+    textSize(texs);
+      }
+    
     void draw() {
-      
+      background(back);
+        int origc = int(g.fill);
+        int origs = int(g.stroke);
+        fill(texc);
+        stroke(texc);
       text("Aim: "+ aim, 15, 15);
       text("Agenda: "+ agenda, 15, 30);
       text(dow + ", " + montht + " " + day + ", " + year, 15, 45);
+      
       if (mixm != null) mixm.draw();
+      fill(origc);
+      stroke(origs);
     }
     void mousePressed() {
       if (mixm != null) mixm.mousePressed();
@@ -234,15 +262,22 @@ class SceneManager {
       }
 
       void draw() {
+        int origc = int(g.fill);
+        int origs = int(g.stroke);
+        fill(texc);
+        stroke(texc);
         for (int i=0;i<conl.length;i++) {
-          text(en[conl[i]], 150, 150+(15*i));
-          text(fr[conr[i]], 250, 150+(15*i));
+          
+          text(en[conl[i]], 150, 150+(texs*i));
+          text(fr[conr[i]], 250, 150+(texs*i));
         }
+        fill(origc);
+        stroke(origs);
         if(sels != -1 && sel != -1) {
           float istrw = g.strokeWeight;
           strokeWeight(2);
-          if(sels == 0)line(165, 150+(15*sel), mouseX, mouseY);
-          if(sels == 1)line(265, 150+(15*sel), mouseX, mouseY);
+          if(sels == 0)line(165, 150+(texs*sel), mouseX, mouseY);
+          if(sels == 1)line(265, 150+(texs*sel), mouseX, mouseY);
           strokeWeight(istrw);
         }
       }
@@ -251,7 +286,7 @@ class SceneManager {
         if (mouseX >= 150 && mouseX <=225) {
           println("In the first collumn");
           for (int i=0;i<conl.length;i++) {
-            if (mouseY >= 150+(15*i) && mouseY <= (150+(15*i))+15) {
+            if (mouseY >= 150+(texs*i)-texs && mouseY <= (150+(texs*i))) {
               println("Bingo");
               sels = 0;
               sel=i;

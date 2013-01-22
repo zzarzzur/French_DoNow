@@ -50,3 +50,10 @@ void mouseDragged() {
 void mouseReleased() {
   scene.mouseReleased();
 }
+int toColorCode(String _colo) {
+  String colo = _colo.toLowerCase();
+  if(colo.equals("black")) return 0;
+  if(colo.equals("white")) return 255;
+  if(colo.equals("green")) return int(color(255,0,255));
+  return int(color(125,125,125));
+}
