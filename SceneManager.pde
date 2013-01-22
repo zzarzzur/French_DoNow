@@ -152,51 +152,64 @@ class SceneManager {
       println("Loading Activity-"+activitye.getString("type")+"-");
       String ac = activitye.getString("type");
       if (ac.equals("mixandmatch")) {
-      println("Activity Mix And Match");
-      int gap = activitye.getInt("gap");
-      XML[] dataene = activitye.getChildren("en");
-      XML[] datafre = activitye.getChildren("fr");
-      String en[] = new String[dataene.length];
-      String fr[] = new String[datafre.length];
-      for (int f=0;f<dataene.length;f++) {
-        en[dataene[f].getInt("id")] = dataene[f].getContent();
-      }
-      for (int f=0;f<datafre.length;f++) {
-        fr[datafre[f].getInt("id")] = datafre[f].getContent();
-      }
-      mixm = new MixMatch(en, fr);
-      mixm.gap = gap;
+        println("Activity Mix And Match");
+        int gap = activitye.getInt("gap");
+        XML[] dataene = activitye.getChildren("en");
+        XML[] datafre = activitye.getChildren("fr");
+        String en[] = new String[dataene.length];
+        String fr[] = new String[datafre.length];
+        for (int f=0;f<dataene.length;f++) {
+          en[dataene[f].getInt("id")] = dataene[f].getContent();
+        }
+        for (int f=0;f<datafre.length;f++) {
+          fr[datafre[f].getInt("id")] = datafre[f].getContent();
+        }
+        mixm = new MixMatch(en, fr);
+        mixm.gap = gap;
       }
       XML textcolore = stylee.getChild("textcolor");
-      if(textcolore.getContent().substring(4).equals("rgb:")) {
-      } else {
-        if(toColorCode(textcolore.getContent()) !=-1) {
+      if (textcolore.getContent().substring(4).equals("rgb:")) {
+      } 
+      else {
+        if (toColorCode(textcolore.getContent()) !=-1) {
           texc = color(toColorCode(textcolore.getContent()));
         }
-    }
-    XML backgrounde = stylee.getChild("background");
-      if(backgrounde.getContent().substring(4).equals("rgb:")) {
-      } else {
-        if(toColorCode(backgrounde.getContent()) !=-1) {
+      }
+      XML backgrounde = stylee.getChild("background");
+      if (backgrounde.getContent().substring(4).equals("rgb:")) {
+      } 
+      else {
+        if (toColorCode(backgrounde.getContent()) !=-1) {
           back = color(toColorCode(backgrounde.getContent()));
         }
-    }
-    XML textsizee = stylee.getChild("textsize");
-    texs = int(textsizee.getContent());
-    textSize(texs);
       }
-    
+      XML textsizee = stylee.getChild("textsize");
+      texs = int(textsizee.getContent());
+      textSize(texs);
+      String acen = activitye.getString("center");
+      if (acen.equals("yes") || acen.equals("true")) {
+        mixm.startx = (width/2)-(mixm.gap/1.3);
+        mixm.starty = (height/2)-((mixm.en.length*(texs/2))/3);
+      }
+    }
+
     void draw() {
       background(back);
-        int origc = int(g.fill);
-        int origs = int(g.stroke);
-        fill(texc);
-        stroke(texc);
-      text("Aim: "+ aim, 15, 15);
-      text("Agenda: "+ agenda, 15, 30);
-      text(dow + ", " + montht + " " + day + ", " + year, 15, 45);
-      
+      int origc = int(g.fill);
+      int origs = int(g.stroke);
+      fill(texc);
+      stroke(texc);
+      text("Aim: "+ aim, 15, texs);
+      text("Agenda: "+ agenda, 15, texs*2);
+      text(dow + ", " + montht + " " + day + ", " + year, 15, texs*3);
+
       if (mixm != null) mixm.draw();
+      /*if(keyPressed) {
+       if(key == 'g') {
+       mixm.startx+=10;
+       mixm.starty+=10;
+       }
+       }*/
       fill(origc);
       stroke(origs);
     }
@@ -216,12 +229,14 @@ class SceneManager {
       int sels=-1;
       int sel=-1;
       int gap=0;
+      float startx=150;
+      float starty=150;
       MixMatch(String[] _en, String[] _fr) {
         en = _en;
         fr = _fr;
         eno = new int[en.length];
         fro = new int[fr.length];
-        
+
         conl = new int[en.length];
         conr = new int[fr.length];
         int[] temp = new int[en.length];
@@ -273,38 +288,39 @@ class SceneManager {
         fill(texc);
         stroke(texc);
         strokeWeight(texs/10);
-        for (int i=0;i<conl.length;i++) {
-          
-          text(en[conl[i]], 150, 150+((texs)*i));
-          text(fr[conr[i]], (150+gap)+(texs*5), 150+((texs)*i));
-        }
-        for(int i=0;i<eno.length;i++) {
-          if(eno[i] != -1) {
-            if(conl[i] == conr[eno[i]]) stroke(0,255,0);
-            else stroke(255,0,0);
-            line(150+(((texs/2)*en[conl[i]].length())), 140+(texs*i),(150+gap)+(texs*5), 140+(texs*eno[i]));
+
+        for (int i=0;i<eno.length;i++) {
+          if (eno[i] != -1) {
+            if (conl[i] == conr[eno[i]]) stroke(0, 255, 0);
+            else stroke(255, 0, 0);
+            line(startx+(((texs/2)*en[conl[i]].length())), (starty-10)+(texs*i), (startx+gap)+(texs*5), (starty-10)+(texs*eno[i]));
           }
+        }
+        for (int i=0;i<conl.length;i++) {
+
+          text(en[conl[i]], startx, starty+((texs)*i));
+          text(fr[conr[i]], (startx+gap)+(texs*5), starty+((texs)*i));
         }
         noFill();
         for (int i=0;i<conr.length;i++) {
-        //rect((150+gap)+(texs*5), 150+(texs*i)-texs, (150+gap)+(((texs/2)*fr[conr[i]].length())), (150+(texs*i)));
+          //rect((150+gap)+(texs*5), 150+(texs*i)-texs, (150+gap)+(((texs/2)*fr[conr[i]].length())), (150+(texs*i)));
         }
         fill(origc);
         stroke(origs);
-        if(sels != -1 && sel != -1) {
+        if (sels != -1 && sel != -1) {
           float istrw = g.strokeWeight;
           strokeWeight(2);
-          if(sels == 0)line(150+(((texs/2)*en[conl[sel]].length())), 140+(texs*sel), mouseX, mouseY);
-          if(sels == 1)line((165+gap)+(texs*sel), 150+(texs*sel), mouseX, mouseY);
+          if (sels == 0)line(startx+(((texs/2)*en[conl[sel]].length())), (starty-10)+(texs*sel), mouseX, mouseY);
+          if (sels == 1)line(((startx+15)+gap)+(texs*sel), starty+(texs*sel), mouseX, mouseY);
           strokeWeight(istrw);
         }
       }
       void mousePressed() {
         println("Received MousePressed");
-        if (mouseX >= 150 && mouseX <=150+(gap*1.5)) {
+        if (mouseX >= startx && mouseX <=startx+(gap*1.5)) {
           println("In the first collumn");
           for (int i=0;i<conl.length;i++) {
-            if (mouseY >= 150+(texs*i)-texs && mouseY <= (150+(texs*i))) {
+            if (mouseY >= starty+(texs*i)-texs && mouseY <= (starty+(texs*i))) {
               println("Bingo");
               sels = 0;
               sel=i;
@@ -315,13 +331,13 @@ class SceneManager {
       void mouseDragged() {
       }
       void mouseReleased() {
-        if (mouseX >= (150+gap)+(texs*5) && mouseX <=width) { //(150+gap)+(((texs/2)*fr[conr[i]].length()))
-           println("In the Second collumn");
+        if (mouseX >= ((startx+gap)+(texs*5))-(texs*2) && mouseX <=width) { //(150+gap)+(((texs/2)*fr[conr[i]].length()))
+          println("In the Second collumn");
           for (int i=0;i<conr.length;i++) {
-            
-            if (mouseY >= 150+(texs*i)-texs && mouseY <= (150+(texs*i))) {
-            eno[sel] = i;
-            fro[i] = sel;
+
+            if (mouseY >= starty+(texs*i)-texs && mouseY <= (starty+(texs*i))) {
+              eno[sel] = i;
+              fro[i] = sel;
             }
           }
         }

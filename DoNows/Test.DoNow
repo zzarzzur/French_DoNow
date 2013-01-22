@@ -9,7 +9,7 @@
 			<textcolor>black</textcolor>
 			<background>white</background>
 		</style>
-		<activity type="mixandmatch" gap="500">
+		<activity type="mixandmatch" gap="500" center="true">
 			<en id="0">The Toilet</en>
 			<fr  id="0">Les Toillettes</fr>
 			<en id="1">The Bathroom</en>
@@ -34,22 +34,7 @@
 			<fr  id="10">La Douche</fr>
 			<en id="11">The Mother</en>
 			<fr  id="11">La Mere</fr>
-			<en id="12">The Toilet</en>
-			<fr  id="12">Les Toillettes</fr>
-			<en id="13">The Bathroom</en>
-			<fr  id="13">La Salle de Bains</fr>
-			<en id="14">The Shower</en>
-			<fr  id="14">La Douche</fr>
-			<en id="15">The Mother</en>
-			<fr  id="15">La Mere</fr>
-			<en id="16">The Toilet</en>
-			<fr  id="16">Les Toillettes</fr>
-			<en id="17">The Bathroom</en>
-			<fr  id="17">La Salle de Bains</fr>
-			<en id="18">The Shower</en>
-			<fr  id="18">La Douche</fr>
-			<en id="19">The Mother</en>
-			<fr  id="19">La Mere</fr>
+
 		</activity>
 	</donow>
 </donows>

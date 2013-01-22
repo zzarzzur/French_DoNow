@@ -9,7 +9,7 @@
 			<textcolor>black</textcolor>
 			<background>white</background>
 		</style>
-		<activity type="mixandmatch" gap="500">
+		<activity type="mixandmatch" gap="500" center="true">
 			<en id="0">The Father</en>
 			<fr  id="0">Les Pere</fr>
 			<en id="1">The Mother</en>
