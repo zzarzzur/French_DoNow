@@ -5,11 +5,11 @@
 		<aim labelsize="15" labelcolor="red">Successfully demonstrate the new interactive donow software</aim>
 		<agenda labelsize="15" labelcolor="red">Demonstrate software.</agenda>
 		<style>
-			<textsize>15</textsize>
+			<textsize>30</textsize>
 			<textcolor>black</textcolor>
 			<background>white</background>
 		</style>
-		<activity type="mixandmatch">
+		<activity type="mixandmatch" gap="500">
 			<en id="0">The Toilet</en>
 			<fr  id="0">Les Toillettes</fr>
 			<en id="1">The Bathroom</en>

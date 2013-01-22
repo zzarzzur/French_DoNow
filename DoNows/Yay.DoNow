@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<donows>
+	<donow>
+		<date month="01" day="24"></date>
+		<aim labelsize="15" labelcolor="red">Successfully demonstrate the new interactive donow software</aim>
+		<agenda labelsize="15" labelcolor="red">Demonstrate software.</agenda>
+		<style>
+			<textsize>30</textsize>
+			<textcolor>black</textcolor>
+			<background>white</background>
+		</style>
+		<activity type="mixandmatch" gap="500">
+			<en id="0">The Father</en>
+			<fr  id="0">Les Pere</fr>
+			<en id="1">The Mother</en>
+			<fr  id="1">La Mere</fr>
+			<en id="2">The Aunt</en>
+			<fr  id="2">La Tante</fr>
+			<en id="3">The Uncle</en>
+			<fr  id="3">L'oncle</fr>
+			<en id="4">The Baby</en>
+			<fr  id="4">La Infant</fr>
+		</activity>
+	</donow>
+</donows>

@@ -80,7 +80,7 @@ class SceneManager {
     if (theEvent.isGroup() && theEvent.name().equals("DoNowSelect")) {
       int test = (int)theEvent.group().value();
       loadDoNow(test);
-      l = null;
+      l.setPosition(-1000, -1000);
     }
   }
   void loadDoNow(int don) {
@@ -153,6 +153,7 @@ class SceneManager {
       String ac = activitye.getString("type");
       if (ac.equals("mixandmatch")) {
       println("Activity Mix And Match");
+      int gap = activitye.getInt("gap");
       XML[] dataene = activitye.getChildren("en");
       XML[] datafre = activitye.getChildren("fr");
       String en[] = new String[dataene.length];
@@ -164,6 +165,7 @@ class SceneManager {
         fr[datafre[f].getInt("id")] = datafre[f].getContent();
       }
       mixm = new MixMatch(en, fr);
+      mixm.gap = gap;
       }
       XML textcolore = stylee.getChild("textcolor");
       if(textcolore.getContent().substring(4).equals("rgb:")) {
@@ -209,15 +211,17 @@ class SceneManager {
     }
     class MixMatch {
       String[] en, fr;
-      int[] eno, fno;
+      int[] eno, fro;
       int[] conl, conr;
       int sels=-1;
       int sel=-1;
+      int gap=0;
       MixMatch(String[] _en, String[] _fr) {
         en = _en;
         fr = _fr;
         eno = new int[en.length];
-        fno = new int[fr.length];
+        fro = new int[fr.length];
+        
         conl = new int[en.length];
         conr = new int[fr.length];
         int[] temp = new int[en.length];
@@ -225,6 +229,8 @@ class SceneManager {
         int conrp=0;
         for (int i=0;i<temp.length;i++) {
           temp[i] = i;
+          eno[i] = -1;
+          fro[i] = -1;
         }
         for (int i=0;i<conl.length;i++) {
           boolean found=false;
@@ -266,24 +272,36 @@ class SceneManager {
         int origs = int(g.stroke);
         fill(texc);
         stroke(texc);
+        strokeWeight(texs/10);
         for (int i=0;i<conl.length;i++) {
           
-          text(en[conl[i]], 150, 150+(texs*i));
-          text(fr[conr[i]], 250, 150+(texs*i));
+          text(en[conl[i]], 150, 150+((texs)*i));
+          text(fr[conr[i]], (150+gap)+(texs*5), 150+((texs)*i));
+        }
+        for(int i=0;i<eno.length;i++) {
+          if(eno[i] != -1) {
+            if(conl[i] == conr[eno[i]]) stroke(0,255,0);
+            else stroke(255,0,0);
+            line(150+(((texs/2)*en[conl[i]].length())), 140+(texs*i),(150+gap)+(texs*5), 140+(texs*eno[i]));
+          }
+        }
+        noFill();
+        for (int i=0;i<conr.length;i++) {
+        //rect((150+gap)+(texs*5), 150+(texs*i)-texs, (150+gap)+(((texs/2)*fr[conr[i]].length())), (150+(texs*i)));
         }
         fill(origc);
         stroke(origs);
         if(sels != -1 && sel != -1) {
           float istrw = g.strokeWeight;
           strokeWeight(2);
-          if(sels == 0)line(165, 150+(texs*sel), mouseX, mouseY);
-          if(sels == 1)line(265, 150+(texs*sel), mouseX, mouseY);
+          if(sels == 0)line(150+(((texs/2)*en[conl[sel]].length())), 140+(texs*sel), mouseX, mouseY);
+          if(sels == 1)line((165+gap)+(texs*sel), 150+(texs*sel), mouseX, mouseY);
           strokeWeight(istrw);
         }
       }
       void mousePressed() {
         println("Received MousePressed");
-        if (mouseX >= 150 && mouseX <=225) {
+        if (mouseX >= 150 && mouseX <=150+(gap*1.5)) {
           println("In the first collumn");
           for (int i=0;i<conl.length;i++) {
             if (mouseY >= 150+(texs*i)-texs && mouseY <= (150+(texs*i))) {
@@ -297,8 +315,18 @@ class SceneManager {
       void mouseDragged() {
       }
       void mouseReleased() {
-        sels = -1;
-        sel = -1;
+        if (mouseX >= (150+gap)+(texs*5) && mouseX <=width) { //(150+gap)+(((texs/2)*fr[conr[i]].length()))
+           println("In the Second collumn");
+          for (int i=0;i<conr.length;i++) {
+            
+            if (mouseY >= 150+(texs*i)-texs && mouseY <= (150+(texs*i))) {
+            eno[sel] = i;
+            fro[i] = sel;
+            }
+          }
+        }
+        sel=-1;
+        sels=-1;
       }
     }
   }
