@@ -2,8 +2,8 @@
 <donows>
 	<donow>
 		<date month="01" day="24"></date>
-		<aim >Successfully demonstrate the new interactive donow software</aim>
-		<agenda>Demonstrate software. Laugh at peoples faces. Present stuff, "Stuff". Test out the long text thingy, check to see if it works. Wow this is getting long. I'm out of stuff to write. Let's say my ABCs!, A B C D E F G...(What came after that, J was it? Oh Yeah) H I J K, I'm bored.</agenda>
+		<aim labelsize="15" labelcolor="red">Successfully demonstrate the new interactive donow software</aim>
+		<agenda labelsize="15" labelcolor="red">Demonstrate software.</agenda>
 		<style>
 			<textsize>30</textsize>
 			<textcolor>black</textcolor>

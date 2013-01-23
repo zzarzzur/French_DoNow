@@ -99,7 +99,7 @@ class SceneManager {
   }
   class DoNow {
     MixMatch mixm;
-    //MakeASentence mas;
+    MakeASentence mas;
     String agenda;
     String dow;
     String day;
@@ -109,6 +109,7 @@ class SceneManager {
     String year;
     int texs;
     color back, texc;
+    String[] students;
     DoNow() {
     }
     void parseXML(XML _parse) {
@@ -118,7 +119,12 @@ class SceneManager {
       XML datee = child.getChild("date");
       XML activitye = child.getChild("activity");
       XML stylee = child.getChild("style");
+      //XML students = loadXML("Students.xml");
+      //XML studentsc = students.getChild("student");
+      //XML[] studentse = studentsc.getChildren("st");
+
       agenda = agendae.getContent();
+
       aim = aime.getContent();
       day = datee.getString("day");
       month = datee.getString("month");
@@ -167,6 +173,8 @@ class SceneManager {
         mixm = new MixMatch(en, fr);
         mixm.gap = gap;
       }
+      if (ac.equals("fillinblank")) {
+      }
       XML textcolore = stylee.getChild("textcolor");
       if (textcolore.getContent().substring(4).equals("rgb:")) {
       } 
@@ -191,6 +199,28 @@ class SceneManager {
         mixm.startx = (width/2)-(mixm.gap/1.3);
         mixm.starty = (height/2)-((mixm.en.length*(texs/2))/3);
       }
+      agenda = "Agenda: " + agenda;
+      String nagenda = "";
+      int charl = int(width/(texs/1.9));
+      println("I Apparently have:" + charl);
+      for (int i=0;i<agenda.length();i++) {
+        nagenda = nagenda + agenda.charAt(i);
+        if (i >= 1) { 
+          if (i == charl || i==charl*2 || i==charl*3 || i==charl*4 || i==charl*5)nagenda+="\n";
+        }
+      }
+      agenda = nagenda;
+      aim = "Aim: " + aim;
+      String naim = "";
+      //int charl = int(width/(texs/1.9));
+      //println("I Apparently have:" + charl);
+      for (int i=0;i<aim.length();i++) {
+        naim = naim + aim.charAt(i);
+        if (i >= 1) { 
+          if (i == charl || i==charl*2 || i==charl*3 || i==charl*4 || i==charl*5)naim+="\n";
+        }
+      }
+      aim = naim;
     }
 
     void draw() {
@@ -199,9 +229,9 @@ class SceneManager {
       int origs = int(g.stroke);
       fill(texc);
       stroke(texc);
-      text("Aim: "+ aim, 15, texs);
-      text("Agenda: "+ agenda, 15, texs*2);
-      text(dow + ", " + montht + " " + day + ", " + year, 15, texs*3);
+      text(aim + "\n" + agenda + "\n" + dow + ", " + montht + " " + day + ", " + year, 15, texs);
+      //text("Agenda: "+ agenda, 15, texs*2);
+      //text(dow + ", " + montht + " " + day + ", " + year, 15, texs*3);
 
       if (mixm != null) mixm.draw();
       /*if(keyPressed) {
@@ -343,6 +373,59 @@ class SceneManager {
         }
         sel=-1;
         sels=-1;
+      }
+    }
+    class MakeASentence {
+      String[] sentences;
+      String[] words;
+      int[] sentor;
+      int[] wordor;
+      MakeASentence(String[] _sentences, String[] _words) {
+        int[] temp = new int[_sentences.length];
+        words = new String[_words.length];
+        sentences = new String[_sentences.length];
+        sentor = new int[_sentences.length];
+        wordor = new int[_words.length];
+        int senlp=0;
+        int worrp=0;
+        for (int i=0;i<temp.length;i++) {
+          temp[i] = i;
+          sentor[i] = -1;
+          wordor[i] = -1;
+        }
+        for (int i=0;i<sentor.length;i++) {
+          boolean found=false;
+          int test = 0;
+          while (found==false) {
+            test = int(random(0, temp.length));
+            for (int h=0;h<temp.length;h++) {
+              if (test == temp[h]) {
+                found = true;
+                temp[h] = -1;
+              }
+            }
+          }
+          sentor[i] = test;
+        }
+        temp = null;
+        temp = new int[_words.length];
+        for (int i=0;i<temp.length;i++) {
+          temp[i] = i;
+        }
+        for (int i=0;i<wordor.length;i++) {
+          boolean found=false;
+          int test = 0;
+          while (found==false) {
+            test = int(random(0, temp.length));
+            for (int h=0;h<temp.length;h++) {
+              if (test == temp[h]) {
+                found = true;
+                temp[h] = -1;
+              }
+            }
+          }
+          wordor[i] = test;
+        }
       }
     }
   }

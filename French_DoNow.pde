@@ -1,4 +1,4 @@
-import codeanticode.protablet.*;
+//import codeanticode.protablet.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,6 +14,7 @@ void setup() {
 }
 String dots = ".";
 void draw() {
+  //println(150 % 50);
   background(0,0,25);
   //scene.draw();
   frameRate(30);
