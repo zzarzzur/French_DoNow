@@ -174,10 +174,6 @@ class SceneManager {
         mixm.gap = gap;
       }
       if (ac.equals("fillinblank")) {
-        println("Activity Fill in the Blank");
-        String wordlist = activitye.getString("wordlist");
-        XML[] sentences = activitye.getChildren("sentences");
-        
       }
       XML textcolore = stylee.getChild("textcolor");
       if (textcolore.getContent().substring(4).equals("rgb:")) {
@@ -380,13 +376,6 @@ class SceneManager {
       }
     }
     class MakeASentence {
-      Sentence[] sentences;
-      String[] wordlist;
-      MakeASentence(Sentence[] _sentences, String[] _wordlist) {
-        sentences = _sentences;
-        wordlist = _wordlist;
-      }
-      /*
       String[] sentences;
       String[] words;
       int[] sentor;
@@ -438,25 +427,6 @@ class SceneManager {
           wordor[i] = test;
         }
       }
-    }
-    */
-    class Sentence {
-      String answer, prefix;
-      String[] conjugations, text;
-      sentence(String _text, String _answer, String _prefix, String[] _conjugations) {
-        text = split(_text, "!~!");
-        answer = _answer;
-        prefix = _prefix
-        conjugations = _conjugations;
-      }
-     void draw(int x, int y) {
-       float boxs = textWidth(text[0]);
-       float boxe = textWidth(answer + prefix);
-       text(text[0], x, y);
-       rect(boxs+5,y, 15, 15);
-       text(answer, boxs+7, y);
-       text(text[1], boxs+boxe+10, y);
-     }
     }
   }
 }

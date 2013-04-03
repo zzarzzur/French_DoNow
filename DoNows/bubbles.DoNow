@@ -1,4 +1,4 @@
-<xml version="1.0"?>
+<?xml version="1.0"?>
 <donows>
 	<donow>
 		<date month="01" day="22" grade="10"></date>
@@ -9,8 +9,11 @@
                         <textcolor>black</textcolor>
                         <background>white</background>
                 </style>
-		<activity type="fillinblank" wordlist="ERVerbs.xml">
-			<sentence id="1" prefix="Je" answer="Acout">I say !~!</sentence>
+		<activity type="fillinblank">
+			<wordbank>
+				<word id="1">Hooray</word>
+			</wordbank>
+			<sentence id="1">I say !~!~!~!~!~!</sentence>
 		</activity>
 	</donow>
 </donows>
