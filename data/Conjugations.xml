@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<conjugations>
+	<conjugator name="ER">
+		<definition contructor="Je">e</definition>
+	</conjugator>
+</conjugations>
