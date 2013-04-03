@@ -1,1 +1,19 @@
-<?xml version="1.0"?><donows>	<donow>		<date month="01" day="22" grade="10"></date>		<aim>Successfully demonstrate the new interactive donow software</aim>		<agenda>Demonstrate software.</agenda>		<activity type="fillinblank">			<wordbank>				<word id="1">Hooray</word>			</wordbank>			<sentence id="1">I say !~!~!~!~!~!</sentence>		</activity>	</donow></donows>
+<?xml version="1.0"?>
+<donows>
+	<donow>
+		<date month="01" day="22" grade="10"></date>
+		<aim>Successfully demonstrate the new interactive donow software</aim>
+		<agenda>Demonstrate software.</agenda>
+                <style>
+                        <textsize>30</textsize>
+                        <textcolor>black</textcolor>
+                        <background>white</background>
+                </style>
+		<activity type="fillinblank">
+			<wordbank>
+				<word id="1">Hooray</word>
+			</wordbank>
+			<sentence id="1">I say !~!~!~!~!~!</sentence>
+		</activity>
+	</donow>
+</donows>

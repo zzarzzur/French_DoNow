@@ -206,10 +206,10 @@ class SceneManager {
       for (int i=0;i<agenda.length();i++) {
         nagenda = nagenda + agenda.charAt(i);
         if (i >= 1) { 
-          if (i == charl || i==charl*2 || i==charl*3 || i==charl*4 || i==charl*5)nagenda+="\n";
+          //if (i == charl || i==charl*2 || i==charl*3 || i==charl*4 || i==charl*5)nagenda+="\n";
         }
       }
-      agenda = nagenda;
+      //agenda = nagenda;
       aim = "Aim: " + aim;
       String naim = "";
       //int charl = int(width/(texs/1.9));
@@ -217,10 +217,10 @@ class SceneManager {
       for (int i=0;i<aim.length();i++) {
         naim = naim + aim.charAt(i);
         if (i >= 1) { 
-          if (i == charl || i==charl*2 || i==charl*3 || i==charl*4 || i==charl*5)naim+="\n";
+          //if (i == charl || i==charl*2 || i==charl*3 || i==charl*4 || i==charl*5)naim+="\n";
         }
       }
-      aim = naim;
+      //aim = naim;
     }
 
     void draw() {
@@ -229,7 +229,7 @@ class SceneManager {
       int origs = int(g.stroke);
       fill(texc);
       stroke(texc);
-      text(aim + "\n" + agenda + "\n" + dow + ", " + montht + " " + day + ", " + year, 15, texs);
+      text(wordWrap(aim + "\n" + agenda + "\n" + dow + ", " + montht + " " + day + ", " + year, width-15), 15, texs);
       //text("Agenda: "+ agenda, 15, texs*2);
       //text(dow + ", " + montht + " " + day + ", " + year, 15, texs*3);
 

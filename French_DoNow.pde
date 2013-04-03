@@ -14,6 +14,8 @@ void setup() {
 }
 String dots = ".";
 void draw() {
+  //println(wordWrap("sdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasvsdfvadsfasdfasfvavasv", 15));
+  //exit();
   //println(150 % 50);
   background(0, 0, 25);
   //scene.draw();
@@ -59,4 +61,33 @@ int toColorCode(String _colo) {
   if (colo.equals("green")) return int(color(255, 0, 255));
   return int(color(125, 125, 125));
 }
+String wordWrap(String s, int wid) {
+  String[] sa = split(s, " ");
+  String[] lines = new String[sa.length];
+  int linesc = 0;
+  String temp = "";
+  for (int i=0;i<sa.length;i++) {
+    if(sa[i] != "" && sa[i] != null) {
+    if (textWidth(temp + " " + sa[i]) > wid) {
+      lines[linesc] = temp;
+      temp = "";
+      linesc++;
+    } 
+
+      temp+=sa[i] + " ";
+    
+    }
+  }
+  String compile = "";
+  for (int i=0;i<lines.length;i++) {
+    if (lines[i] != "" && lines[i] != null) {
+      compile+=lines[i] + "\n";
+      println("Parsed line:" + lines[i]);
+    }
+  }
+  return compile;
+}
+
+
+
 
