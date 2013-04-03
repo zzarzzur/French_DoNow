@@ -60,8 +60,9 @@ int toColorCode(String _colo) {
   if (colo.equals("white")) return 255;
   if (colo.equals("green")) return int(color(255, 0, 255));
   return int(color(125, 125, 125));
-}
+} 
 String wordWrap(String s, int wid) {
+  if(textWidth(s) <= wid) return s;
   String[] sa = split(s, " ");
   String[] lines = new String[sa.length];
   int linesc = 0;

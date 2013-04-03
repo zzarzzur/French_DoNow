@@ -1,25 +1,45 @@
 <?xml version="1.0"?>
 <donows>
 	<donow>
-		<date month="01" day="24"></date>
-		<aim >Successfully demonstrate the new interactive donow software</aim>
-		<agenda>Demonsdafasdfas sdfasdfa sdfasd fasd fasf asf asdfasfasdf gasdg asd gasd gasd gad gas dgad gads gstrate software. Laugh at peoples faces. Present stuff, "Stuff". Test out the long text thingy, check to see if it works. Wow this is getting long. I'm out of stuff to write. Let's say my ABCs!, A B C D E F G...(What came after that, J was it? Oh Yeah) H I J K, I'm bored.</agenda>
+		<date month="04" day="03"></date>
+		<aim >Idk.</aim>
+		<agenda> None.</agenda>
 		<style>
 			<textsize>30</textsize>
 			<textcolor>black</textcolor>
 			<background>white</background>
 		</style>
 		<activity type="mixandmatch" gap="500" center="true">
-			<en id="0">The Father</en>
-			<fr  id="0">Les Pere</fr>
-			<en id="1">The Mother</en>
-			<fr  id="1">La Mere</fr>
-			<en id="2">The Aunt</en>
-			<fr  id="2">La Tante</fr>
-			<en id="3">The Uncle</en>
-			<fr  id="3">L'oncle</fr>
-			<en id="4">The Baby</en>
-			<fr  id="4">La Infant</fr>
+			<en id="0">un gateau</en>
+			<fr  id="0">la boulangerie-patisserie</fr>
+			<en id="1">du pain</en>
+			<fr  id="1">la boulangerie-patisserie</fr>
+			<en id="2">une tarte</en>
+			<fr  id="2">la boulangerie-patisserie</fr>
+			<en id="3">une baguette</en>
+			<fr  id="3">la boulangerie-patisserie</fr>
+			<en id="4">de la creme</en>
+			<fr  id="4">la cremerie</fr>
+			<en id="5">du lait</en>
+			<fr id="5">la cremerie</fr>
+			<en id="6">un oeuf</en>
+			<fr id="6">la cremerie</fr>
+			<en id="7">un poulet</en>
+			<fr id="7">la boucherie</fr>
+			<en id="8">du porc</en>
+			<fr id="8">la boucherie</fr>
+			<en id="9">un poisson</en>
+			<fr id="9">la poissonnerie</fr>
+			<en id="10">un crevette</en>
+			<fr id="10">la poissonnerie</fr>
+			<en id="11">du saucisson</en>
+			<fr id="11">la charcuterie</fr>
+			<en id="12">du jambon</en>
+			<fr id="12">la charcuterie</fr>
+			<en id="13">du poivre</en>
+			<fr id="13">l'epicerie</fr>
+			<en id="14">du sel</en>
+			<fr id="14">l'epicerie</fr>
 		</activity>
 	</donow>
 </donows>

@@ -261,17 +261,25 @@ class SceneManager {
       int gap=0;
       float startx=150;
       float starty=150;
+      int[][] match;
       MixMatch(String[] _en, String[] _fr) {
         en = _en;
         fr = _fr;
         eno = new int[en.length];
         fro = new int[fr.length];
-
+        match = new int[en.length][en.length]; 
         conl = new int[en.length];
         conr = new int[fr.length];
         int[] temp = new int[en.length];
         int conlp=0;
         int conrp=0;
+        for(int i=0; i<en.length; i++) {
+          for(int j=0; j<en.length; j++) {
+            for(int k=0; k<en.length; k++) {
+              if(j != k && fr[j].equals(fr[k])) match[i][j] = k;
+            }
+          }
+        }
         for (int i=0;i<temp.length;i++) {
           temp[i] = i;
           eno[i] = -1;
@@ -323,13 +331,25 @@ class SceneManager {
           if (eno[i] != -1) {
             if (conl[i] == conr[eno[i]]) stroke(0, 255, 0);
             else stroke(255, 0, 0);
+            
+              for(int p=0; p<fr.length; p++) {
+              //if(fr[o] != "" && fr[p] != -1) {
+                //println("-" + fr[conl[i]] + "=" + fr[p] + "-" +"-" + fr[conr[i]] + "=" + fr[p] + "-" +"-" + fr[conr[eno[i]]] + "=" + fr[p] + "-" +"-" + fr[conl[eno[i]]] + "=" + fr[p] + "-");
+                if(fr[conl[i]].equals(fr[p]) && conr[i] != conl[p] && i != p && fr[p].equals(fr[conr[eno[i]]])) {
+                stroke(0, 255, 0); println("FOUND!!!!-" + fr[conl[i]] + "=" + fr[p] + "-"); break; } else { println("Failed"); stroke(255, 0, 0); }
+              
+             // }
+            }
             line(startx+(((texs/2)*en[conl[i]].length())), (starty-10)+(texs*i), (startx+gap)+(texs*5), (starty-10)+(texs*eno[i]));
           }
         }
         for (int i=0;i<conl.length;i++) {
-
+          try {
           text(en[conl[i]], startx, starty+((texs)*i));
           text(fr[conr[i]], (startx+gap)+(texs*5), starty+((texs)*i));
+          } catch(Exception e) {
+            e.printStackTrace();
+          }
         }
         noFill();
         for (int i=0;i<conr.length;i++) {
